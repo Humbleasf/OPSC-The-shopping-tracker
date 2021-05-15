@@ -11,23 +11,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="277dp"
+        android:onClick="Capture"
         android:text="capture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ImgItem" />
+        app:layout_constraintTop_toBottomOf="@+id/imgCaptureC" />
 
     <ImageView
-        android:id="@+id/ImgItem"
+        android:id="@+id/imgCaptureC"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="71dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="82dp"
         app:layout_constraintBottom_toTopOf="@+id/btnCapture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_shopping_tracker" />
+        app:srcCompat="@drawable/pop_up_border" />
+
+    <Button
+        android:id="@+id/btnGalC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="235dp"
+        tools:layout_editor_absoluteY="406dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
