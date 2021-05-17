@@ -10,24 +10,20 @@
         android:id="@+id/btnCapture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="277dp"
+        android:layout_marginStart="53dp"
         android:onClick="Capture"
         android:text="capture"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.197"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgCaptureC" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnGalC"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imgCaptureC"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="53dp"
+        android:layout_height="400dp"
+        android:scaleType="fitXY"
+        android:layout_marginStart="52dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="53dp"
-        android:layout_marginBottom="82dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCapture"
+        android:layout_marginEnd="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,8 +33,11 @@
         android:id="@+id/btnGalC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="235dp"
-        tools:layout_editor_absoluteY="406dp" />
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="66dp"
+        android:onClick="getGallery"
+        android:text="Gallery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgCaptureC" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

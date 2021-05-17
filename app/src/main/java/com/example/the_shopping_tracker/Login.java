@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity
                 final String strPass = Password.getText().toString();
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference userRef = database.getReference().child("Names/Users/" + strName);//need to correct the firebase reference
+                DatabaseReference userRef = database.getReference().child(strName + "/Password");
 
                 //reading from database
                 userRef.addValueEventListener(new ValueEventListener()
@@ -101,6 +101,10 @@ public class Login extends AppCompatActivity
     public void ClearText(View view)
     {
         startActivity(new Intent(Login.this, CategoryPage.class));
+    }
+    public void Exit(View v)
+    {
+        System.exit(0);
     }
 
     @Override

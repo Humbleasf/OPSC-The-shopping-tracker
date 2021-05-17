@@ -123,6 +123,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="#17B11D"
         android:text="Exit"
+        android:onClick="Exit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
