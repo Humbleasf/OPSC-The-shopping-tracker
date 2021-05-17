@@ -6,8 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,18 +19,22 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.NoSuchElementException;
 
 public class CategoryPage extends AppCompatActivity
 {
-    final int PICK_IMAGE = 1000;
+    private static int PICK_IMAGE = 1;
     final int PERMISSION_CODE = 1001;//the code of the permission for reading gallery
     ImageView im;
-    Uri UGallery;
     Button btnGal;
+
 //try do it via a set on click listener like in vid
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -82,15 +90,12 @@ public class CategoryPage extends AppCompatActivity
         Intent Gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);//gets the gallery apps from the device not sim card storage
         Gallery.setType("image/*");//this gets the image path
         startActivityForResult(Gallery, PICK_IMAGE);
+        /*Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        for some reason saying external content gets the internal storage
+        pickIntent.setType("image/*");//sets the type of data
 
-        //Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        //for some reason saying external content gets the internal storage
-        //pickIntent.setType("image/*");//sets the type of data
-
-        //startActivityForResult(pickIntent, PICK_IMAGE);
+        startActivityForResult(pickIntent, PICK_IMAGE);*/
     }
-
-    //try see how reece did it to fit the images with home time app
 
     @Override
     public void setTitle(CharSequence title)
@@ -104,21 +109,32 @@ public class CategoryPage extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        //for camera
         super.onActivityResult(requestCode,resultCode,data);
+        //for camera
         Bitmap bm = (Bitmap) data.getExtras().get("data");
         im.setImageBitmap(bm);
 
         //for gallery
-        if(resultCode == RESULT_OK && requestCode == 0)
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE)
         {
-
             try
             {
-                Uri UImage = data.getData();
-                InputStream is = getContentResolver().openInputStream(UImage);
-                Bitmap IsBm = BitmapFactory.decodeStream(is);
-                im.setImageBitmap(IsBm);
+                //Hamad. 2013. Get selected image from gallery into imageView, StackOverflow. 25 November 2013. [Blog]. Available at:
+                //https://stackoverflow.com/questions/20197487/get-selected-image-from-gallery-into-imageview/20197713 [Accessed 17 May 2021]
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String picturePath = cursor.getString(columnIndex);
+                cursor.close();
+
+                //ImageView tim = (ImageView) findViewById(R.id.imgCaptureC);
+                im.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
             }
             catch (Exception e)
             {
