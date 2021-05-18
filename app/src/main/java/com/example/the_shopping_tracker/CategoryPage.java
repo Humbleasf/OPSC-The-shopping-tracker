@@ -34,6 +34,7 @@ public class CategoryPage extends AppCompatActivity
     final int PERMISSION_CODE = 1001;//the code of the permission for reading gallery
     ImageView im;
     Button btnGal;
+    Camera cam = new Camera();
 
 //try do it via a set on click listener like in vid
     @Override
@@ -55,11 +56,9 @@ public class CategoryPage extends AppCompatActivity
     //must be public for layout to pickup
     public void Capture(View view)
     {
-        Intent in = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //this is the same as saying that the new intent or page that should display is the camera option on your phone
-
-        startActivityForResult(in,0);
+        startActivityForResult(cam.in,0);
     }
+
     public void getGallery(View view)
     {
         //this aparently checks if the permission was granted by the user to let the app access the gallery
@@ -80,6 +79,7 @@ public class CategoryPage extends AppCompatActivity
             }
         }
     }
+
     private void PickFromGallery()
     {
         /*Patel, J. 2017. No activity found to handle intent, StackOverflow. 16 August 2017. [Blog]. Available at:
@@ -87,7 +87,8 @@ public class CategoryPage extends AppCompatActivity
         Pick an image from the gallery-Android studio-Java. 2018. Youtube video, added by Perviaz, A.
         [Online]. Available at: https://www.youtube.com/watch?v=O6dWwoULFI8 [Accessed 15 May 2021]*/
 
-        Intent Gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);//gets the gallery apps from the device not sim card storage
+        //gets the gallery apps from the device not sim card storage
+        Intent Gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         Gallery.setType("image/*");//this gets the image path
         startActivityForResult(Gallery, PICK_IMAGE);
         /*Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -111,8 +112,8 @@ public class CategoryPage extends AppCompatActivity
     {
         super.onActivityResult(requestCode,resultCode,data);
         //for camera
-        Bitmap bm = (Bitmap) data.getExtras().get("data");
-        im.setImageBitmap(bm);
+        cam.cbm = (Bitmap) data.getExtras().get("data");
+        im.setImageBitmap(cam.cbm);
 
         //for gallery
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE)
@@ -124,15 +125,16 @@ public class CategoryPage extends AppCompatActivity
                 Uri selectedImage = data.getData();
                 String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
-                Cursor cursor = getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
+                //on a way this selects all the items in the gallery and sorts them.
+                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
                 cursor.moveToFirst();
 
+                //gets the selected item in the index declared
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 String picturePath = cursor.getString(columnIndex);
                 cursor.close();
 
-                //ImageView tim = (ImageView) findViewById(R.id.imgCaptureC);
+                //sets the image from the file selected in the index
                 im.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
             }

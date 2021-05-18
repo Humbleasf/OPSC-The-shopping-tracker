@@ -18,13 +18,11 @@
 
     <ImageView
         android:id="@+id/imgCaptureC"
-        android:layout_width="0dp"
-        android:layout_height="400dp"
-        android:scaleType="fitXY"
+        android:layout_width="90dp"
+        android:layout_height="83dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="52dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/pop_up_border" />
@@ -33,11 +31,11 @@
         android:id="@+id/btnGalC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
         android:layout_marginEnd="66dp"
+        android:layout_marginBottom="171dp"
         android:onClick="getGallery"
         android:text="Gallery"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgCaptureC" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
