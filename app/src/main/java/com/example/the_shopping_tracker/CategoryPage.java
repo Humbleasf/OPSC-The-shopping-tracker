@@ -46,7 +46,6 @@ public class CategoryPage extends AppCompatActivity
         im = findViewById(R.id.imgCaptureC);
         btnGal = findViewById(R.id.btnGalC);
 
-
         setTitle("The Shopping Tracker");
     }
 //Android Studio Tutorial - Take picture with Camera learn android programming. 2016. Youttube video, added by EDMT Dev. [Online]. Available at:
@@ -112,8 +111,16 @@ public class CategoryPage extends AppCompatActivity
     {
         super.onActivityResult(requestCode,resultCode,data);
         //for camera
-        cam.cbm = (Bitmap) data.getExtras().get("data");
-        im.setImageBitmap(cam.cbm);
+        try
+        {
+            cam.cbm = (Bitmap) data.getExtras().get("data");
+            im.setImageBitmap(cam.cbm);
+        }
+        catch(Exception e)
+        {
+            startActivity(new Intent());
+        }
+
 
         //for gallery
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE)

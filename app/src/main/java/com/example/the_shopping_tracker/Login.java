@@ -62,15 +62,12 @@ public class Login extends AppCompatActivity
                     {
                         // This method is called once with the initial value and again
                         // whenever data at this location is updated.
-                        String value = ds.getValue(String.class);
+                        String ValidPass = ds.getValue().toString();
                         //see if i can get login to happen in here
 
-                        String validpass;
-                        validpass = value;
-
-                        if(strPass.equals(validpass))
+                        if(strPass.equals(ValidPass))
                         {
-                            Toast.makeText(getApplicationContext(), "You are the real " + strName,
+                            Toast.makeText(getApplicationContext(), "Enjoy your shopping " + strName,
                                     Toast.LENGTH_LONG).show();
 
 
@@ -82,7 +79,7 @@ public class Login extends AppCompatActivity
                                     Toast.LENGTH_LONG).show();
                         }
 
-                        Log.d("Firebase", "Value is: " + value);
+                        Log.d("Firebase", "Value is: " + ValidPass);
                     }
                     @Override
                     public void onCancelled(DatabaseError error)
@@ -98,10 +95,6 @@ public class Login extends AppCompatActivity
         setTitle("The Shopping Tracker");
     }
 
-    public void ClearText(View view)
-    {
-        startActivity(new Intent(Login.this, CategoryPage.class));
-    }
     public void Exit(View v)
     {
         System.exit(0);
