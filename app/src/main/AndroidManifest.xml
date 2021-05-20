@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.the_shopping_tracker">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.The_Shopping_Tracker">
-        <activity android:name=".CategoryPage"></activity>
+        <activity android:name=".Profile"></activity>
+        <activity android:name=".CategoryPage" />
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,8 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Pop"
-            android:theme="@style/AppTheme.popTheme"/>
+        <activity
+            android:name=".Pop"
+            android:theme="@style/AppTheme.popTheme" />
     </application>
 
 </manifest>

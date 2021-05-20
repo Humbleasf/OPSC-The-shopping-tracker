@@ -9,9 +9,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,14 +16,8 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.NoSuchElementException;
 
 public class CategoryPage extends AppCompatActivity
 {
@@ -34,7 +25,7 @@ public class CategoryPage extends AppCompatActivity
     final int PERMISSION_CODE = 1001;//the code of the permission for reading gallery
     ImageView im;
     Button btnGal;
-    Camera cam = new Camera();
+    Camera_Gallery cam = new Camera_Gallery();
 
 //try do it via a set on click listener like in vid
     @Override
@@ -46,7 +37,7 @@ public class CategoryPage extends AppCompatActivity
         im = findViewById(R.id.imgCaptureC);
         btnGal = findViewById(R.id.btnGalC);
 
-        setTitle("The Shopping Tracker");
+        setTitle("Category");
     }
 //Android Studio Tutorial - Take picture with Camera learn android programming. 2016. Youttube video, added by EDMT Dev. [Online]. Available at:
 //https://www.youtube.com/watch?v=ondCeqlAwEI [Accessed 14 May 2021]
@@ -56,6 +47,11 @@ public class CategoryPage extends AppCompatActivity
     public void Capture(View view)
     {
         startActivityForResult(cam.in,0);
+    }
+
+    public void Profile(View v)
+    {
+        startActivity(new Intent(CategoryPage.this, Profile.class));
     }
 
     public void getGallery(View view)
@@ -85,7 +81,6 @@ public class CategoryPage extends AppCompatActivity
         https://stackoverflow.com/questions/45707678/no-activity-found-to-handle-intent-act-android-intent-action-pick-dat-content [Accessed 15 May 2021]
         Pick an image from the gallery-Android studio-Java. 2018. Youtube video, added by Perviaz, A.
         [Online]. Available at: https://www.youtube.com/watch?v=O6dWwoULFI8 [Accessed 15 May 2021]*/
-
         //gets the gallery apps from the device not sim card storage
         Intent Gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         Gallery.setType("image/*");//this gets the image path
@@ -118,31 +113,17 @@ public class CategoryPage extends AppCompatActivity
         }
         catch(Exception e)
         {
-            startActivity(new Intent());
+            startActivity(new Intent(CategoryPage.this, CategoryPage.class));
         }
-
 
         //for gallery
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE)
         {
             try
             {
-                //Hamad. 2013. Get selected image from gallery into imageView, StackOverflow. 25 November 2013. [Blog]. Available at:
-                //https://stackoverflow.com/questions/20197487/get-selected-image-from-gallery-into-imageview/20197713 [Accessed 17 May 2021]
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
-
-                //on a way this selects all the items in the gallery and sorts them.
-                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                cursor.moveToFirst();
-
-                //gets the selected item in the index declared
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String picturePath = cursor.getString(columnIndex);
-                cursor.close();
-
+                cam.getGallery(data);
                 //sets the image from the file selected in the index
-                im.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                im.setImageBitmap(BitmapFactory.decodeFile(cam.picturePath));
 
             }
             catch (Exception e)

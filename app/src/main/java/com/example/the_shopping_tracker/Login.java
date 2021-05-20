@@ -92,7 +92,7 @@ public class Login extends AppCompatActivity
             }
 
         });
-        setTitle("The Shopping Tracker");
+        setTitle("Login");
     }
 
     public void Exit(View v)

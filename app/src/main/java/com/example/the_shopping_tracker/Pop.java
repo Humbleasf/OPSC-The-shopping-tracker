@@ -1,6 +1,7 @@
 package com.example.the_shopping_tracker;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -16,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 // [Online]. Available at: https://www.youtube.com/watch?v=fn5OlqQuOCk&t=211s [Accessed 14 May 2021]
 public class Pop extends Activity//go to manifest and type in <activity name = "pop"/> to incluse this
 {
-
     EditText name,password;
     Button btnRegister;
 
@@ -27,7 +27,7 @@ public class Pop extends Activity//go to manifest and type in <activity name = "
         setContentView(R.layout.register_popup);
 
         name = (EditText) findViewById(R.id.txtRegName);
-        password = findViewById(R.id.txtPass);
+        password = findViewById(R.id.txtRegPass);
         btnRegister = findViewById(R.id.btnRegUser);
 
         //below metrics get the size of the curret display pixels of the device being used
@@ -63,8 +63,10 @@ public class Pop extends Activity//go to manifest and type in <activity name = "
                     // Write a message to the database
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                    DatabaseReference userNameRef = database.getReference().child("" + strName);//i still need to make a firebase database for this, i know how to just busy with other things atm
+                    DatabaseReference userNameRef = database.getReference().child(strName + "/Password");
                     userNameRef.setValue(strPass);
+                    Toast.makeText(getApplicationContext(), "user registered ", Toast.LENGTH_LONG).show();
+                    Intent close = new Intent(Pop.this,Login.class);
                 }
             }
         });
