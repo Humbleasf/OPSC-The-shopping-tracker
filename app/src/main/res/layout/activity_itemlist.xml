@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".ItemList">
+
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="378dp"
+        android:layout_height="423dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="134dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="174dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvItemList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="88dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="282dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="621dp"
+        android:layout_weight="30"
+        android:text="Description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="63dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginEnd="190dp"
+        android:layout_marginBottom="623dp"
+        android:layout_weight="30"
+        android:backgroundTint="#2196F3"
+        android:text="Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="63dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginEnd="306dp"
+        android:layout_marginBottom="623dp"
+        android:layout_weight="30"
+        android:backgroundTint="#2196F3"
+        android:text="Image"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fltAddItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#2196F3"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/btmNaviBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="#2196F3"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/btmNaviBar"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:background="#7F858A"
+        app:layout_constraintHorizontal_weight="100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="20"
+                android:onClick="HomePage"
+                app:srcCompat="@drawable/home2" />
+
+            <ImageButton
+                android:id="@+id/btnProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="20"
+                android:onClick="Profile"
+                app:srcCompat="@drawable/profile2" />
+
+            <ImageButton
+                android:id="@+id/btnShopping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="20"
+                android:onClick="ShoppingPage"
+                app:srcCompat="@drawable/trolley2" />
+
+            <ImageButton
+                android:id="@+id/btnGraph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="20"
+                android:onClick="GraphPage"
+                app:srcCompat="@drawable/grapgh2" />
+
+            <ImageButton
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="20"
+                android:onClick="LogoutPage"
+                app:srcCompat="@drawable/logout2" />
+        </LinearLayout>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
