@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +34,6 @@ public class Login extends AppCompatActivity
         Password = findViewById(R.id.txtPass);
         btnRegi = findViewById(R.id.btnReg);
         btnLog = findViewById(R.id.btnLogin);
-
         btnRegi.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -44,12 +44,12 @@ public class Login extends AppCompatActivity
         });
         btnLog.setOnClickListener(new View.OnClickListener()
         {
-
             @Override
             public void onClick(View v)
             {
-                final String strName = Uname.getText().toString();
+                String strName = Uname.getText().toString();
                 final String strPass = Password.getText().toString();
+
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference userRef = database.getReference().child(strName + "/Password");
@@ -60,26 +60,33 @@ public class Login extends AppCompatActivity
                     @Override
                     public void onDataChange(DataSnapshot ds)
                     {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        String ValidPass = ds.getValue().toString();
-                        //see if i can get login to happen in here
+                        try {
+                            // This method is called once with the initial value and again
+                            // whenever data at this location is updated.
+                            String ValidPass = ds.getValue().toString();
+                            //see if i can get login to happen in here
 
-                        if(strPass.equals(ValidPass))
-                        {
-                            Toast.makeText(getApplicationContext(), "Enjoy your shopping " + strName,
-                                    Toast.LENGTH_LONG).show();
+                            if (strPass.equals(ValidPass)) {
+                                Toast.makeText(getApplicationContext(), "Enjoy your shopping " + strName,
+                                        Toast.LENGTH_LONG).show();
 
+                                //intent.putExtra("Catagory", cData.get(position).getcName);
+                                //startActivity(new Intent(Login.this, CategoryPage.class));
+                                Intent Home = new Intent(Login.this, CategoryPage.class);
+                                Home.putExtra("Name", strName);
+                                startActivity(Home);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "error, wrong password or username",
+                                        Toast.LENGTH_LONG).show();
+                            }
 
-                            startActivity(new Intent(Login.this, CategoryPage.class));
+                            Log.d("Firebase", "Value is: " + ValidPass);
                         }
-                        else
-                        {
+                        catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "error, wrong password or username",
                                     Toast.LENGTH_LONG).show();
                         }
 
-                        Log.d("Firebase", "Value is: " + ValidPass);
                     }
                     @Override
                     public void onCancelled(DatabaseError error)
@@ -88,7 +95,6 @@ public class Login extends AppCompatActivity
                         Log.w("Firebase", "Failed to read value.", error.toException());
                     }
                 });
-
             }
 
         });
@@ -99,7 +105,6 @@ public class Login extends AppCompatActivity
     {
         System.exit(0);
     }
-
     @Override
     public void setTitle(CharSequence title)
     {
@@ -108,5 +113,6 @@ public class Login extends AppCompatActivity
         TextView tv = new TextView(this);
         tv.setText(title);
     }
+
 
 }

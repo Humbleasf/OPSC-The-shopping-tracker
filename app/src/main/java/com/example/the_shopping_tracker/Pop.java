@@ -67,6 +67,7 @@ public class Pop extends Activity//go to manifest and type in <activity name = "
                     userNameRef.setValue(strPass);
                     Toast.makeText(getApplicationContext(), "user registered ", Toast.LENGTH_LONG).show();
                     Intent close = new Intent(Pop.this,Login.class);
+                    startActivity(close);
                 }
             }
         });

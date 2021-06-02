@@ -3,6 +3,9 @@
     package="com.example.the_shopping_tracker">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,8 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.The_Shopping_Tracker">
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".popCategory" />
+        <activity android:name=".Profile" />
+        <activity android:name=".Shopping_Cart"/>
         <activity android:name=".CategoryPage" />
+        <activity android:name=".ItemList"/>
+        <activity android:name=".AddItems"/>
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
